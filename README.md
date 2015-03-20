@@ -1,3 +1,5 @@
+**NOTE** The README has not been updated to reflect the change to support Java 1.6 **NOTE**
+
 jinjava [![Build Status](https://travis-ci.org/HubSpot/jinjava.svg?branch=master)](https://travis-ci.org/HubSpot/jinjava) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.hubspot.jinjava/jinjava/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.hubspot.jinjava/jinjava)
 =======
 
