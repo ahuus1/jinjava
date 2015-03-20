@@ -3,9 +3,8 @@ package com.hubspot.jinjava.lib.tag;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.LinkedList;
-import java.util.List;
+import com.hubspot.jinjava.util.StandardCharsets;
+
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
@@ -16,7 +15,9 @@ import com.google.common.io.Resources;
 import com.hubspot.jinjava.Jinjava;
 import com.hubspot.jinjava.interpret.Context;
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;
+import com.hubspot.jinjava.parse.TokenParser;
 import com.hubspot.jinjava.tree.Node;
+import com.hubspot.jinjava.tree.NodeList;
 import com.hubspot.jinjava.tree.TagNode;
 import com.hubspot.jinjava.tree.TreeParser;
 
@@ -46,7 +47,7 @@ public class RawTagTest {
 
   @Test
   public void renderTags() {
-    List<Node> tags = fixtures("tags");
+    NodeList tags = fixtures("tags");
     String result = "";
     
     for(Node n : tags) {
@@ -105,11 +106,12 @@ public class RawTagTest {
     return (TagNode) fixtures(name).getFirst();
   }
 
-  private LinkedList<Node> fixtures(String name) {
+  private NodeList fixtures(String name) {
     try {
-      return new TreeParser(interpreter, Resources.toString(
-              Resources.getResource(String.format("tags/rawtag/%s.jinja", name)), StandardCharsets.UTF_8))
-              .buildTree().getChildren();
+      return TreeParser.parseTree(
+          new TokenParser(interpreter, Resources.toString(
+              Resources.getResource(String.format("tags/rawtag/%s.jinja", name)), StandardCharsets.UTF_8)))
+              .getChildren();
     } catch (IOException e) {
       throw Throwables.propagate(e);
     }

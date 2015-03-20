@@ -2,7 +2,7 @@ package com.hubspot.jinjava.lib.filter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -34,17 +34,13 @@ public class RoundFilter implements Filter {
     }
 
     RoundingMode roundingMode;
-    
-    switch(method) {
-    case "ceil":
-      roundingMode = RoundingMode.CEILING;
-      break;
-    case "floor":
-      roundingMode = RoundingMode.FLOOR;
-      break;
-    case "common":
-    default:
-      roundingMode = RoundingMode.HALF_UP;
+        
+    if (method.equals("ceil")){
+    	roundingMode = RoundingMode.CEILING;
+    } else if (method.equalsIgnoreCase("floor")){
+        roundingMode = RoundingMode.FLOOR;
+    } else {
+        roundingMode = RoundingMode.HALF_UP;
     }
     
     return result.setScale(precision, roundingMode);

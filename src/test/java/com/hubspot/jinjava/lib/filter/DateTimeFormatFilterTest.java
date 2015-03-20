@@ -2,9 +2,8 @@ package com.hubspot.jinjava.lib.filter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +18,7 @@ public class DateTimeFormatFilterTest {
   JinjavaInterpreter interpreter;
   DateTimeFormatFilter filter;
 
-  ZonedDateTime d;
+  DateTime d;
   
   @Before
   public void setup() {
@@ -27,12 +26,12 @@ public class DateTimeFormatFilterTest {
     Context context = new Context();
     interpreter = new JinjavaInterpreter(jinjava, context, jinjava.getGlobalConfig());
     filter = new  DateTimeFormatFilter();
-    d = ZonedDateTime.parse("2013-11-06T14:22:00.000+00:00[UTC]");
+    d = DateTime.parse("2013-11-06T14:22:00.000");
   }
 
   @Test
   public void itUsesTodayIfNoDateProvided() throws Exception {
-    assertThat(filter.filter(null, interpreter)).isEqualTo(StrftimeFormatter.format(ZonedDateTime.now(ZoneOffset.UTC)));
+    assertThat(filter.filter(null, interpreter)).isEqualTo(StrftimeFormatter.format(DateTime.now(DateTimeZone.UTC)));
   }
   
   @Test

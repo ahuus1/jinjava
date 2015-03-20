@@ -13,17 +13,26 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  **********************************************************************/
-package com.hubspot.jinjava.tree.parse;
+package com.hubspot.jinjava.parse;
 
-public interface TokenScannerSymbols {
+public interface ParserConstants {
 
   int TOKEN_PREFIX = '{';
   int TOKEN_POSTFIX = '}';
   int TOKEN_FIXED = 0;
   int TOKEN_NOTE = '#';
   int TOKEN_TAG = '%';
-  int TOKEN_EXPR_START = '{';
-  int TOKEN_EXPR_END = '}';
+  int TOKEN_ECHO = '{';
+  int TOKEN_ECHO2 = '}';
   int TOKEN_NEWLINE = '\n';
+  int TOKEN_SQUOT = '\'';
+  int TOKEN_DQUOT = '"';
+
+  char VL = '|';
+  char CL = ':';
+  char CM = ',';
+  char SQ = '\'';
+  char DQ = '"';
+  char SP = ' ';
 
 }

@@ -24,7 +24,7 @@ public class XmlAttrFilterTest {
   
   @Test
   public void testXmlAttr() {
-    Map<String, Object> context = new HashMap<>();
+    Map<String, Object> context = new HashMap<String,Object>();
     context.put("variable", 42);
     
     Document dom = Jsoup.parseBodyFragment(jinjava.render(

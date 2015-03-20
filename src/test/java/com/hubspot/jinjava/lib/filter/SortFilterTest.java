@@ -57,7 +57,7 @@ public class SortFilterTest {
   }
   
   String render(String sortExtra, Object... items) {
-    Map<String, Object> context = new HashMap<>();
+    Map<String, Object> context = new HashMap<String, Object>();
     context.put("iterable", items);
     
     return jinjava.render("{% for item in iterable|sort" + sortExtra + " %}{{ item }}{% endfor %}", context);

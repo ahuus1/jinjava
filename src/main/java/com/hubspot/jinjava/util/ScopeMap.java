@@ -107,7 +107,7 @@ public class ScopeMap<K, V> implements Map<K, V> {
 
   @Override
   public Set<K> keySet() {
-    Set<K> keys = new HashSet<>();
+    Set<K> keys = new HashSet<K>();
     
     if(parent != null) {
       keys.addAll(parent.keySet());
@@ -121,7 +121,7 @@ public class ScopeMap<K, V> implements Map<K, V> {
   @Override
   public Collection<V> values() {
     Set<java.util.Map.Entry<K, V>> entrySet = entrySet();
-    Collection<V> values = new ArrayList<>(entrySet.size());
+    Collection<V> values = new ArrayList<V>(entrySet.size());
     
     for(Map.Entry<K, V> entry : entrySet) {
       values.add(entry.getValue());
@@ -132,7 +132,7 @@ public class ScopeMap<K, V> implements Map<K, V> {
 
   @Override
   public Set<java.util.Map.Entry<K, V>> entrySet() {
-    Set<java.util.Map.Entry<K, V>> entries = new HashSet<>();
+    Set<java.util.Map.Entry<K, V>> entries = new HashSet<java.util.Map.Entry<K, V>>();
     
     for(K key : keySet()) {
       entries.add(new ScopeMapEntry<K, V>(key, get(key), this));

@@ -28,7 +28,7 @@ public class UrlEncodeFilterTest {
   
   @Test
   public void itEncodesDictAsParamPairs() {
-    Map<String, String> dict = new LinkedHashMap<>();
+    Map<String, String> dict = new LinkedHashMap<String, String>();
     dict.put("foo", "bar=set");
     dict.put("other", "val");
     

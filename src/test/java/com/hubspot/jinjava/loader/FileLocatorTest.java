@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+
+import com.hubspot.jinjava.util.StandardCharsets;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +34,7 @@ public class FileLocatorTest {
     
     locatorWorkingDir = new FileLocator();
     
-    File tmpDir = java.nio.file.Files.createTempDirectory(getClass().getSimpleName()).toFile();
+    File tmpDir = createTempDirectory(getClass().getSimpleName());
     locatorTmpDir = new FileLocator(tmpDir);
     
     first = new File(tmpDir, "foo/first.jinja");
@@ -43,6 +45,18 @@ public class FileLocatorTest {
     
     Files.write("first", first, StandardCharsets.UTF_8);
     Files.write("second", second, StandardCharsets.UTF_8);
+  }
+  
+  public static File createTempDirectory(String tempDirName) throws IOException{
+	  File tempDir;
+	  try {
+		  tempDir = File.createTempFile(tempDirName,"");
+		  tempDir.delete();
+		  tempDir.mkdir();
+	  } catch (IOException e){
+		  throw e;
+	  }
+	  return tempDir;
   }
 
   @Test

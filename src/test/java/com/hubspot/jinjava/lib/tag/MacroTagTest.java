@@ -4,7 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import com.hubspot.jinjava.util.StandardCharsets;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ import com.hubspot.jinjava.Jinjava;
 import com.hubspot.jinjava.interpret.Context;
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;
 import com.hubspot.jinjava.lib.fn.MacroFunction;
+import com.hubspot.jinjava.parse.TokenParser;
 import com.hubspot.jinjava.tree.Node;
 import com.hubspot.jinjava.tree.TagNode;
 import com.hubspot.jinjava.tree.TreeParser;
@@ -101,7 +103,7 @@ public class MacroTagTest {
   
   @Test
   public void testMacroUsedInForLoop() throws Exception {
-    Map<String, Object> bindings = new HashMap<>();
+    Map<String, Object> bindings = new HashMap<String, Object>();
     bindings.put("widget_data", ImmutableMap.of(
         "tools_body_1", ImmutableMap.of("html", "body1"),
         "tools_body_2", ImmutableMap.of("html", "body2"),
@@ -119,7 +121,7 @@ public class MacroTagTest {
   }
   
   private Node snippet(String jinja) {
-    return new TreeParser(interpreter, jinja).buildTree().getChildren().getFirst();
+    return TreeParser.parseTree(new TokenParser(interpreter, jinja)).getChildren().getFirst();
   }
   
   private TagNode fixture(String name) {

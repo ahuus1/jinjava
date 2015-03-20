@@ -60,7 +60,7 @@ public class AstRangeBracket extends AstBracket {
       baseItr = (Iterable<?>) base;
     }
     
-    PyList result = new PyList(new ArrayList<>());
+    PyList result = new PyList(new ArrayList<Object>());
     int startNum = ((Number) start).intValue();
     int endNum = ((Number) end).intValue();
     int index = 0;

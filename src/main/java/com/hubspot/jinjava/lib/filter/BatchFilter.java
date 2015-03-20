@@ -50,14 +50,14 @@ public class BatchFilter implements Filter {
     Object fillWith = args.length > 1 ? args[1] : null;
     
     ForLoop loop = ObjectIterator.getLoop(var);
-    List<List<Object>> result = new ArrayList<>();
+    List<List<Object>> result = new ArrayList<List<Object>>();
     List<Object> currentRow = null;
     
     while(loop.hasNext()) {
       Object item = loop.next();
       
       if(currentRow == null) {
-        currentRow = new ArrayList<>();
+        currentRow = new ArrayList<Object>();
         result.add(currentRow);
       }
       

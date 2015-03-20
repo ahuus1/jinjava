@@ -1,6 +1,6 @@
 package com.hubspot.jinjava.lib.tag;
 
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;
 import com.hubspot.jinjava.tree.TagNode;

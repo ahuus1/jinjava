@@ -24,7 +24,7 @@ public class SumFilterTest {
   
   @Test
   public void sumWithAttr() {
-    Map<String, Object> context = new HashMap<>();
+    Map<String, Object> context = new HashMap<String, Object>();
     context.put("items", Lists.newArrayList(new Item(12), new Item(30.50)));
     
     assertThat(jinjava.render("{{ items|sum(attribute='price') }}", context)).isEqualTo("42.5");
@@ -32,7 +32,7 @@ public class SumFilterTest {
   
   @Test
   public void sumWithAttrAndStart() {
-    Map<String, Object> context = new HashMap<>();
+    Map<String, Object> context = new HashMap<String, Object>();
     context.put("items", Lists.newArrayList(new Item(12), new Item(30.50)));
     
     assertThat(jinjava.render("{{ items|sum(attribute='price', 10) }}", context)).isEqualTo("52.5");
@@ -40,7 +40,7 @@ public class SumFilterTest {
   
   @Test
   public void sumOfSeq() {
-    Map<String, Object> context = new HashMap<>();
+    Map<String, Object> context = new HashMap<String, Object>();
     context.put("items", Lists.newArrayList(12, 30.50));
     
     assertThat(jinjava.render("{{ items|sum }}", context)).isEqualTo("42.5");

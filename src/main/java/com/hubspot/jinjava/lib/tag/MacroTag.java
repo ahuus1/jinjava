@@ -90,7 +90,7 @@ public class MacroTag implements Tag {
     String name = matcher.group(1);
     String args = Objects.firstNonNull(matcher.group(2), "");
     
-    LinkedHashMap<String, Object> argNamesWithDefaults = new LinkedHashMap<>();
+    LinkedHashMap<String, Object> argNamesWithDefaults = new LinkedHashMap<String,Object>();
 
     List<String> argList = Lists.newArrayList(ARGS_SPLITTER.split(args));
     for(int i = 0; i < argList.size(); i++) {

@@ -15,21 +15,21 @@ limitations under the License.
  **********************************************************************/
 package com.hubspot.jinjava.tree;
 
-import java.util.LinkedList;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;
-import com.hubspot.jinjava.tree.parse.ExpressionToken;
+import com.hubspot.jinjava.parse.EchoToken;
 import com.hubspot.jinjava.util.Logging;
 import com.hubspot.jinjava.util.ObjectValue;
 
-public class ExpressionNode extends Node {
+public class VariableNode extends Node {
+
+  private static final String NAME = "Variable_Node";
+
   private static final long serialVersionUID = 341642231109911346L;
+  private EchoToken master;
 
-  private final ExpressionToken master;
-
-  public ExpressionNode(ExpressionToken token) {
+  public VariableNode(EchoToken token) {
     super(token, token.getLineNumber());
     master = token;
   }
@@ -58,13 +58,13 @@ public class ExpressionNode extends Node {
 
   @Override
   public String getName() {
-    return getClass().getSimpleName();
+    return NAME;
   }
 
   @Override
   public Node clone() {
-    Node clone = new ExpressionNode(master);
-    clone.setChildren(new LinkedList<>(this.getChildren()));
+    Node clone = new VariableNode(master);
+    clone.setChildren(this.getChildren().clone(clone));
     return clone;
   }
 }

@@ -1,18 +1,5 @@
 # Jinjava Releases #
 
-### Version 2.0.0 ([Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.hubspot.jinjava%22%20AND%20v%3A%222.0.0%22)) ###
-
-* 2.0.x requires JDK 8, as it contains some critical fixes to date formatting for certain languages (i.e. Finnish months)
-
-* The 2.0.x release has some significant refactorings in the parsing code:
-** nests the .parse package under the existing .tree package
-** consolidating the token scanner logic, updating the node tree parser
-
-* future updates will be able to detect more specific template syntax errors than was previously possible.
-
-* NodeList has been removed in favor of the native JDK LinkedList implementation
-
-
 ### Version 1.0.9 ([Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.hubspot.jinjava%22%20AND%20v%3A%221.0.9%22)) ###
 
 * changed how validation of object properties happens; previously, jinjava would add TemplateErrors for unknown properties at the context root (i.e. 'foo') and when the property existed but the value was null (i.e. 'foo.bar == null'). the new logic will only add an error when the property isn't found on the given base object.

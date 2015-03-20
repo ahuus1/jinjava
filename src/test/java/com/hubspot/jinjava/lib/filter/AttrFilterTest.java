@@ -24,7 +24,7 @@ public class AttrFilterTest {
   
   @Test
   public void testAttr() {
-    Map<String, Object> context = new HashMap<>();
+    Map<String, Object> context = new HashMap<String,Object>();
     context.put("foo", new MyFoo());
     
     assertThat(jinjava.render("{{ foo|attr(\"bar\") }}", context)).isEqualTo("mybar");
@@ -32,7 +32,7 @@ public class AttrFilterTest {
   
   @Test
   public void testAttrNotFound() {
-    Map<String, Object> context = new HashMap<>();
+    Map<String, Object> context = new HashMap<String,Object>();
     context.put("foo", new MyFoo());
     
     RenderResult renderResult = jinjava.renderForResult("{{ foo|attr(\"barf\") }}", context);
@@ -44,7 +44,7 @@ public class AttrFilterTest {
   
   @Test
   public void testAttrNull() {
-    Map<String, Object> context = new HashMap<>();
+    Map<String, Object> context = new HashMap<String,Object>();
     context.put("foo", new MyFoo());
     
     assertThat(jinjava.render("{{ foo|attr(\"null_val\") }}", context)).isEqualTo("");

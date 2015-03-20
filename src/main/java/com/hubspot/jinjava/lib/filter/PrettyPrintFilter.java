@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -44,7 +44,7 @@ public class PrettyPrintFilter implements Filter {
   }
   
   private String objPropsToString(Object var) {
-    List<String> props = new LinkedList<>();
+    List<String> props = new LinkedList<String>();
     
     try {
       BeanInfo beanInfo = Introspector.getBeanInfo(var.getClass());

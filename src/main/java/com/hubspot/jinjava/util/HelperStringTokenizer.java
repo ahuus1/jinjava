@@ -15,6 +15,11 @@ limitations under the License.
  **********************************************************************/
 package com.hubspot.jinjava.util;
 
+import static com.hubspot.jinjava.parse.ParserConstants.CM;
+import static com.hubspot.jinjava.parse.ParserConstants.DQ;
+import static com.hubspot.jinjava.parse.ParserConstants.SP;
+import static com.hubspot.jinjava.parse.ParserConstants.SQ;
+
 import java.util.List;
 
 import com.google.common.collect.AbstractIterator;
@@ -32,7 +37,7 @@ public class HelperStringTokenizer extends AbstractIterator<String> {
   private int currPost = 0;
   private int tokenStart = 0;
   private int length = 0;
-  private char lastChar = ' ';
+  private char lastChar = SP;
   private boolean useComma = false;
   private char quoteChar = 0;
   private boolean inQuote = false;
@@ -70,7 +75,7 @@ public class HelperStringTokenizer extends AbstractIterator<String> {
 
   private String makeToken() {
     char c = helpers[currPost++];
-    if (c == '"' || c == '\'') {
+    if (c == DQ | c == SQ) {
       if (inQuote) {
         if (quoteChar == c) {
           inQuote = false;
@@ -80,7 +85,7 @@ public class HelperStringTokenizer extends AbstractIterator<String> {
         quoteChar = c;
       }
     }
-    if ((Character.isWhitespace(c) || (useComma && c == ',')) && !inQuote) {
+    if ((Character.isWhitespace(c) || (useComma && c == CM)) && !inQuote) {
       return newToken();
     }
     if (currPost == length) {
@@ -96,7 +101,7 @@ public class HelperStringTokenizer extends AbstractIterator<String> {
   private String newToken() {
     int lastStart = tokenStart;
     tokenStart = currPost;
-    if (Character.isWhitespace(lastChar) || (useComma && lastChar == ',')) {
+    if (Character.isWhitespace(lastChar) || (useComma && lastChar == CM)) {
       return null;
     }
     // startChar = -1;//change to save quote in helper

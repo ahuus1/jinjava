@@ -1,7 +1,7 @@
 package com.hubspot.jinjava.el.ext;
 
 import java.util.Collection;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 

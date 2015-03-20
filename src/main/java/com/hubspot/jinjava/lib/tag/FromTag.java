@@ -45,7 +45,7 @@ public class FromTag implements Tag {
     }
 
     String templateFile = interpreter.resolveString(helper.get(0), tagNode.getLineNumber());
-    Map<String, String> imports = new LinkedHashMap<>();
+    Map<String, String> imports = new LinkedHashMap<String, String>();
     
     PeekingIterator<String> args = Iterators.peekingIterator(helper.subList(2, helper.size()).iterator());
     

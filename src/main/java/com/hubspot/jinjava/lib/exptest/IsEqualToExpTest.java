@@ -1,6 +1,6 @@
 package com.hubspot.jinjava.lib.exptest;
 
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import com.hubspot.jinjava.interpret.InterpretException;
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;

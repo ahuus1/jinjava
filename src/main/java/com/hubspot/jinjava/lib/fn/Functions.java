@@ -2,14 +2,13 @@ package com.hubspot.jinjava.lib.fn;
 
 import static com.hubspot.jinjava.util.Logging.ENGINE_LOG;
 
-import java.time.Instant;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import com.google.common.collect.Lists;
 import com.hubspot.jinjava.interpret.InterpretException;
@@ -17,6 +16,7 @@ import com.hubspot.jinjava.interpret.JinjavaInterpreter;
 import com.hubspot.jinjava.objects.date.PyishDate;
 import com.hubspot.jinjava.objects.date.StrftimeFormatter;
 import com.hubspot.jinjava.tree.Node;
+import com.hubspot.jinjava.tree.NodeList;
 
 public class Functions {
 
@@ -24,8 +24,7 @@ public class Functions {
     JinjavaInterpreter interpreter = JinjavaInterpreter.getCurrent();
     StringBuilder result = new StringBuilder();
     
-    @SuppressWarnings("unchecked")
-    List<Node> superBlock = (List<Node>) interpreter.getContext().get("__superbl0ck__");
+    NodeList superBlock = (NodeList) interpreter.getContext().get("__superbl0ck__");
     if(superBlock != null) {
       for(Node n : superBlock) {
         result.append(n.render(interpreter));
@@ -40,21 +39,21 @@ public class Functions {
   }
   
   public static String dateTimeFormat(Object var, String... format) {
-    ZonedDateTime d = null;
+    DateTime d = null;
     
     if(var == null) {
-      d = ZonedDateTime.now(ZoneOffset.UTC);
+      d = DateTime.now(DateTimeZone.UTC);
     }
     else if(var instanceof Long) {
-      d = ZonedDateTime.ofInstant(Instant.ofEpochMilli((long) var), ZoneOffset.UTC);
+      d = new DateTime((Long) var, DateTimeZone.UTC);
     }
     else if(var instanceof PyishDate) {
       d = ((PyishDate) var).toDateTime();
     }
-    else if(var instanceof ZonedDateTime) {
-      d = (ZonedDateTime) var;
+    else if(var instanceof DateTime) {
+      d = (DateTime) var;
     }
-    else if(!ZonedDateTime.class.isAssignableFrom(var.getClass())) {
+    else if(!DateTime.class.isAssignableFrom(var.getClass())) {
       throw new InterpretException("Input to datetimeformat function must be a date object, was: " + var.getClass());
     }
     

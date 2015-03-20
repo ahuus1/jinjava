@@ -183,7 +183,7 @@ public class ExtendedParser extends Parser {
   
   protected AstDict dict() throws ScanException, ParseException {
     consumeToken();
-    Map<AstNode, AstNode> dict = new HashMap<>();
+    Map<AstNode, AstNode> dict = new HashMap<AstNode, AstNode>();
     
     AstNode k = expr(false);
     if(k != null) {

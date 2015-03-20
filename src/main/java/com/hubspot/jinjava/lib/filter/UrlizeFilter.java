@@ -1,6 +1,6 @@
 package com.hubspot.jinjava.lib.filter;
 
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

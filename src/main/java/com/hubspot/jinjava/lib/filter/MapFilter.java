@@ -28,7 +28,7 @@ public class MapFilter implements Filter {
     String attr = args[0];
     Filter apply = interpreter.getContext().getFilter(attr);
     
-    List<Object> result = new ArrayList<>();
+    List<Object> result = new ArrayList<Object>();
     
     while(loop.hasNext()) {
       Object val = loop.next();

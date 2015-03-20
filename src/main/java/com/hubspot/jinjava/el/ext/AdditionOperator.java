@@ -1,6 +1,7 @@
 package com.hubspot.jinjava.el.ext;
 
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
+
 
 import de.odysseus.el.misc.NumberOperations;
 import de.odysseus.el.misc.TypeConverter;

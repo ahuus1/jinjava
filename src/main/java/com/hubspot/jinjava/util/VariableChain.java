@@ -60,8 +60,12 @@ public class VariableChain {
     if(getter != null && getter != NULL_METHOD) {
       try {
         return getter.invoke(value);
-      } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+      } catch (IllegalAccessException e) {
         ENGINE_LOG.error("resolve variable trigger error.", e);
+      } catch (IllegalArgumentException e){
+        ENGINE_LOG.error("resolve variable trigger error.", e);  
+      } catch (InvocationTargetException e){
+        ENGINE_LOG.error("resolve variable trigger error.", e); 
       }
     }
     
@@ -123,11 +127,13 @@ public class VariableChain {
         Method m = clazz.getMethod(prefix + transformedName);
         m.setAccessible(true);
         return m;
-      } catch (NoSuchMethodException | SecurityException e) { 
+      } catch (NoSuchMethodException e) { 
         /* no-op */
+      } catch (SecurityException e){
+          /* no-op */
       }
     }
-
+    
     return NULL_METHOD;
   }
 

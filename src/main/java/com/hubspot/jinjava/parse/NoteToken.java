@@ -13,9 +13,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  **********************************************************************/
-package com.hubspot.jinjava.tree.parse;
+package com.hubspot.jinjava.parse;
 
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_NOTE;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_NOTE;
 
 public class NoteToken extends Token {
 

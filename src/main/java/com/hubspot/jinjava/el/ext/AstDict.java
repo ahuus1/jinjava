@@ -2,7 +2,7 @@ package com.hubspot.jinjava.el.ext;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import javax.el.ELContext;
 
@@ -24,7 +24,7 @@ public class AstDict extends AstLiteral {
 
   @Override
   public Object eval(Bindings bindings, ELContext context) {
-    Map<String, Object> resolved = new HashMap<>();
+    Map<String, Object> resolved = new HashMap<String, Object>();
     
     for(Map.Entry<AstNode, AstNode> entry : dict.entrySet()) {
       String key;

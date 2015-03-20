@@ -1,6 +1,6 @@
 package com.hubspot.jinjava.el;
 
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import javax.el.ELContext;
 import javax.el.ELException;

@@ -4,7 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import com.hubspot.jinjava.util.StandardCharsets;
+
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package com.hubspot.jinjava.lib.filter;
 
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.math.NumberUtils;

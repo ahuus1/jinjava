@@ -2,7 +2,8 @@ package com.hubspot.jinjava.loader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.nio.charset.StandardCharsets;
+import com.hubspot.jinjava.util.StandardCharsets;
+
 
 import org.junit.Before;
 import org.junit.Test;

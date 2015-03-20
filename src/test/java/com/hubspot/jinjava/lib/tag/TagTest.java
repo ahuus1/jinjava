@@ -41,7 +41,7 @@ public class TagTest {
   public void setup() {
     jinjava = new Jinjava();
     
-    bindings = new HashMap<>();
+    bindings = new HashMap<String, Object>();
     bindings.put("var1", new Integer[]{23, 45, 45, 689});
     bindings.put("var2", "45");
     bindings.put("var3", 12);

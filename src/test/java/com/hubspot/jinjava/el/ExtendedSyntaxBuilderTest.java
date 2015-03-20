@@ -4,7 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import com.hubspot.jinjava.util.StandardCharsets;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

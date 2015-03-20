@@ -2,10 +2,9 @@ package com.hubspot.jinjava.objects.date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.Date;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 
@@ -19,21 +18,21 @@ public class PyishDateTest {
 
   @Test
   public void testStrfmt() {
-    PyishDate d = new PyishDate(ZonedDateTime.parse("2013-11-12T14:15:00+00:00"));
+    PyishDate d = new PyishDate(DateTime.parse("2013-11-12T14:15:00").toDate());
     assertThat(d.strftime("%m %d %y")).isEqualTo("11 12 13");
   }
 
   @Test
   public void testEquals() {
-    PyishDate d1 = new PyishDate(ZonedDateTime.parse("2013-11-12T14:15:00+00:00"));
-    PyishDate d2 = new PyishDate(ZonedDateTime.parse("2013-11-12T14:15:00+00:00"));
+    PyishDate d1 = new PyishDate(DateTime.parse("2013-11-12T14:15:00").toDate());
+    PyishDate d2 = new PyishDate(DateTime.parse("2013-11-12T14:15:00").toDate());
     assertThat(d1).isEqualTo(d2);
   }
 
   @Test
   public void testNotEquals() {
-    PyishDate d1 = new PyishDate(ZonedDateTime.parse("2013-11-12T14:15:00+00:00"));
-    PyishDate d2 = new PyishDate(ZonedDateTime.now(ZoneOffset.UTC));
+    PyishDate d1 = new PyishDate(DateTime.parse("2013-11-12T14:15:00").toDate());
+    PyishDate d2 = new PyishDate(new DateTime());
     assertThat(d1).isNotEqualTo(d2);
   }
 
@@ -44,7 +43,7 @@ public class PyishDateTest {
 
   @Test(expected=NullPointerException.class)
   public void testNullDateTimeNotAllowed() {
-    new PyishDate((ZonedDateTime)null);
+    new PyishDate((DateTime)null);
   }
 
   @Test(expected=NullPointerException.class)

@@ -13,20 +13,20 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  **********************************************************************/
-package com.hubspot.jinjava.tree.parse;
+package com.hubspot.jinjava.parse;
 
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_EXPR_START;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_ECHO;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.hubspot.jinjava.util.WhitespaceUtils;
 
-public class ExpressionToken extends Token {
+public class EchoToken extends Token {
   private static final long serialVersionUID = 8307037212944170832L;
 
   private String expr;
   
-  public ExpressionToken(String image, int lineNumber) {
+  public EchoToken(String image, int lineNumber) {
     super(image, lineNumber);
   }
 
@@ -38,7 +38,7 @@ public class ExpressionToken extends Token {
 
   @Override
   public int getType() {
-    return TOKEN_EXPR_START;
+    return TOKEN_ECHO;
   }
 
   @Override

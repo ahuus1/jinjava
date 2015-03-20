@@ -13,22 +13,20 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  **********************************************************************/
-package com.hubspot.jinjava.tree.parse;
+package com.hubspot.jinjava.parse;
 
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_EXPR_END;
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_EXPR_START;
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_FIXED;
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_NEWLINE;
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_NOTE;
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_POSTFIX;
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_PREFIX;
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_TAG;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_ECHO;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_ECHO2;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_FIXED;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_NEWLINE;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_NOTE;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_POSTFIX;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_PREFIX;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_TAG;
 
-import com.google.common.collect.AbstractIterator;
+public class Tokenizer {
 
-public class TokenScanner extends AbstractIterator<Token> {
-
-  private final char[] is;
+  private char[] is;
   private int currPost = 0;
   private int tokenStart = 0;
   private int tokenLength = 0;
@@ -41,9 +39,9 @@ public class TokenScanner extends AbstractIterator<Token> {
   private char inQuote = 0;
   private int currLine = 1;
 
-  public TokenScanner(String input) {
-    is = input.toCharArray();
-    length = input.length();
+  public void init(String inputstream) {
+    is = inputstream.toCharArray();
+    length = inputstream.length();
     currPost = 0;
     tokenStart = 0;
     tokenKind = -1;
@@ -106,11 +104,11 @@ public class TokenScanner extends AbstractIterator<Token> {
             }
             break;
           case TOKEN_TAG:
-          case TOKEN_EXPR_START:
+          case TOKEN_ECHO:
             if (inComment > 0) {
               continue;
             }
-            if (inRaw > 0 && (c == TOKEN_EXPR_START || !isEndRaw())) {
+            if (inRaw > 0 && (c == TOKEN_ECHO || !isEndRaw())) {
               continue;
             }
             // match token two ends
@@ -142,7 +140,7 @@ public class TokenScanner extends AbstractIterator<Token> {
         
       // maybe current token is closing
       case TOKEN_TAG:
-      case TOKEN_EXPR_END:
+      case TOKEN_ECHO2:
         if (inComment > 0) {
           continue;
         }
@@ -255,24 +253,13 @@ public class TokenScanner extends AbstractIterator<Token> {
   }
 
   private boolean matchToken(char kind) {
-    if (kind == TOKEN_EXPR_START) {
-      return tokenKind == TOKEN_EXPR_END;
-    } else if (kind == TOKEN_EXPR_END) {
-      return tokenKind == TOKEN_EXPR_START;
+    if (kind == TOKEN_ECHO) {
+      return tokenKind == TOKEN_ECHO2;
+    } else if (kind == TOKEN_ECHO2) {
+      return tokenKind == TOKEN_ECHO;
     } else {
       return kind == tokenKind;
     }
-  }
-
-  @Override
-  protected Token computeNext() {
-    Token t = getNextToken();
-
-    if(t == null) {
-      return endOfData();
-    }
-    
-    return t;
   }
 
 }

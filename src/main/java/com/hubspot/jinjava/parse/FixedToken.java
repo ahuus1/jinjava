@@ -13,17 +13,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  **********************************************************************/
-package com.hubspot.jinjava.tree.parse;
+package com.hubspot.jinjava.parse;
 
-import static com.hubspot.jinjava.tree.parse.TokenScannerSymbols.TOKEN_FIXED;
+import static com.hubspot.jinjava.parse.ParserConstants.TOKEN_FIXED;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class TextToken extends Token {
+public class FixedToken extends Token {
 
   private static final long serialVersionUID = -5015884072204770458L;
 
-  public TextToken(String image, int lineNumber) {
+  public FixedToken(String image, int lineNumber) {
     super(image, lineNumber);
   }
 

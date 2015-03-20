@@ -5,7 +5,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,7 +30,7 @@ public class UrlEncodeFilter implements Filter {
         @SuppressWarnings("unchecked")
         Map<Object, Object> dict = (Map<Object, Object>) var;
         
-        List<String> paramPairs = new ArrayList<>();
+        List<String> paramPairs = new ArrayList<String>();
 
         for(Map.Entry<Object, Object> param : dict.entrySet()) {
           StringBuilder paramPair = new StringBuilder();

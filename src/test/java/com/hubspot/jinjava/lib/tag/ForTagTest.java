@@ -3,7 +3,8 @@ package com.hubspot.jinjava.lib.tag;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import com.hubspot.jinjava.util.StandardCharsets;
+
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import com.google.common.io.Resources;
 import com.hubspot.jinjava.Jinjava;
 import com.hubspot.jinjava.interpret.Context;
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;
+import com.hubspot.jinjava.parse.TokenParser;
 import com.hubspot.jinjava.tree.Node;
 import com.hubspot.jinjava.tree.TagNode;
 import com.hubspot.jinjava.tree.TreeParser;
@@ -117,9 +119,10 @@ public class ForTagTest {
   
   private Node fixture(String name) {
     try {
-      return new TreeParser(interpreter, Resources.toString(
-              Resources.getResource(String.format("tags/fortag/%s.jinja", name)), StandardCharsets.UTF_8))
-              .buildTree().getChildren().getFirst();
+      return TreeParser.parseTree(
+          new TokenParser(interpreter, Resources.toString(
+              Resources.getResource(String.format("tags/fortag/%s.jinja", name)), StandardCharsets.UTF_8)))
+              .getChildren().getFirst();
     } catch (IOException e) {
       throw Throwables.propagate(e);
     }

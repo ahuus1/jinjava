@@ -1,12 +1,14 @@
 package com.hubspot.jinjava.lib.filter;
 
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;
 
 public class WordCountFilter implements Filter {
+
+  private static final int UNICODE_CHARACTER_CLASS = 0x100;
 
   @Override
   public String getName() {
@@ -26,6 +28,6 @@ public class WordCountFilter implements Filter {
     return count;
   }
 
-  private static final Pattern WORD_RE = Pattern.compile("\\w+", Pattern.UNICODE_CHARACTER_CLASS | Pattern.MULTILINE);
+  private static final Pattern WORD_RE = Pattern.compile("\\w+", UNICODE_CHARACTER_CLASS | Pattern.MULTILINE);
 
 }

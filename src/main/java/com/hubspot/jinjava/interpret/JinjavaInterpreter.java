@@ -37,17 +37,20 @@ import com.hubspot.jinjava.el.ExpressionResolver;
 import com.hubspot.jinjava.el.JinjavaELContext;
 import com.hubspot.jinjava.el.JinjavaInterpreterResolver;
 import com.hubspot.jinjava.lib.fn.ELFunctionDefinition;
+import com.hubspot.jinjava.parse.TokenParser;
 import com.hubspot.jinjava.tree.Node;
+import com.hubspot.jinjava.tree.NodeList;
 import com.hubspot.jinjava.tree.TreeParser;
-import com.hubspot.jinjava.util.JinjavaPropertyNotResolvedException;
+import com.hubspot.jinjava.util.Objects;
 import com.hubspot.jinjava.util.Variable;
+import com.hubspot.jinjava.util.JinjavaPropertyNotResolvedException;
 import com.hubspot.jinjava.util.WhitespaceUtils;
 
 import de.odysseus.el.util.SimpleContext;
 
 public class JinjavaInterpreter {
 
-  private final Multimap<String, List<? extends Node>> blocks = ArrayListMultimap.create();
+  private final Multimap<String, NodeList> blocks = ArrayListMultimap.create();
   private final LinkedList<Node> extendParentRoots = new LinkedList<Node>();
   
   private Context context;
@@ -57,7 +60,7 @@ public class JinjavaInterpreter {
   private final Jinjava application;
   
   private int lineNumber = -1;
-  private final List<TemplateError> errors = new LinkedList<>();
+  private final List<TemplateError> errors = new LinkedList<TemplateError>();
   
   
   public JinjavaInterpreter(Jinjava application, Context context, JinjavaConfig renderConfig) {
@@ -80,7 +83,7 @@ public class JinjavaInterpreter {
     extendParentRoots.add(root);
   }
 
-  public void addBlock(String name, LinkedList<? extends Node> value) {
+  public void addBlock(String name, NodeList value) {
     blocks.put(name, value);
   }
   
@@ -96,7 +99,7 @@ public class JinjavaInterpreter {
   }
   
   public Node parse(String template) {
-    return new TreeParser(this, template).buildTree();
+    return TreeParser.parseTree(new TokenParser(this, template));
   }
   
   public String renderString(String template) {
@@ -160,11 +163,11 @@ public class JinjavaInterpreter {
       
       String blockValue = "";
       
-      Collection<List<? extends Node>> blockChain = blocks.get(blockName);
-      List<? extends Node> block = Iterables.getFirst(blockChain, null);
+      Collection<NodeList> blockChain = blocks.get(blockName);
+      NodeList block = Iterables.getFirst(blockChain, null);
       
       if(block != null) {
-        List<? extends Node> superBlock = Iterables.get(blockChain, 1, null);
+        NodeList superBlock = Iterables.get(blockChain, 1, null);
         context.put("__superbl0ck__", superBlock);
         
         StringBuilder blockValueBuilder = new StringBuilder();
@@ -248,7 +251,7 @@ public class JinjavaInterpreter {
    * @return resolved value for variable
    */
   public String resolveString(String variable, int lineNumber) {
-    return java.util.Objects.toString(resolveObject(variable, lineNumber), "");
+    return Objects.toString(resolveObject(variable, lineNumber), "");
   }
 
   public Context getContext() {
@@ -299,7 +302,7 @@ public class JinjavaInterpreter {
   
   private static final ThreadLocal<Stack<JinjavaInterpreter>> CURRENT_INTERPRETER = new ThreadLocal<Stack<JinjavaInterpreter>>() {
     protected java.util.Stack<JinjavaInterpreter> initialValue() {
-      return new Stack<>();
+      return new Stack<JinjavaInterpreter>();
     }
   };
 

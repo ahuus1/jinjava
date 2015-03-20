@@ -56,15 +56,23 @@ public class ExtendedScanner extends Scanner {
       TOKEN_FIELD.setAccessible(true);
       POSITION_FIELD = Scanner.class.getDeclaredField("position");
       POSITION_FIELD.setAccessible(true);
-    } catch (NoSuchFieldException | SecurityException | NoSuchMethodException e) {
+    } catch (NoSuchFieldException e) {
       throw Throwables.propagate(e);
+    } catch (SecurityException e){
+      throw Throwables.propagate(e);
+    } catch (NoSuchMethodException e){
+      throw Throwables.propagate(e);    	
     }
   }
   
   protected static void addKeyToken(Token token) {
     try {
       ADD_KEY_TOKEN_METHOD.invoke(null, token);
-    } catch(IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+    } catch(IllegalAccessException e) {
+      throw Throwables.propagate(e);
+    } catch(IllegalArgumentException e){
+      throw Throwables.propagate(e);	
+    } catch(InvocationTargetException e){
       throw Throwables.propagate(e);
     }
   }
@@ -72,7 +80,9 @@ public class ExtendedScanner extends Scanner {
   protected void setToken(Token token) {
     try {
       TOKEN_FIELD.set(this, token);
-    } catch (IllegalArgumentException | IllegalAccessException e) {
+    } catch (IllegalArgumentException e) {
+      throw Throwables.propagate(e);
+    } catch (IllegalAccessException e){
       throw Throwables.propagate(e);
     }
   }
@@ -80,8 +90,10 @@ public class ExtendedScanner extends Scanner {
   protected void incrPosition(int n) {
     try {
       POSITION_FIELD.set(this, getPosition() + n);
-    } catch(IllegalArgumentException | IllegalAccessException e) {
+    } catch(IllegalArgumentException e) {
       throw Throwables.propagate(e);
+    } catch(IllegalAccessException e){
+      throw Throwables.propagate(e);	
     }
   }
   

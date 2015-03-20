@@ -20,7 +20,7 @@ public class RejectAttrFilter implements Filter {
 
   @Override
   public Object filter(Object var, JinjavaInterpreter interpreter, String... args) {
-    List<Object> result = new ArrayList<>();
+    List<Object> result = new ArrayList<Object>();
 
     if(args.length == 0) {
       throw new InterpretException(getName() + " filter requires an attr to filter on", interpreter.getLineNumber());

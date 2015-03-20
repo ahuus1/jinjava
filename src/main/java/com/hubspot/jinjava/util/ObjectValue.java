@@ -15,7 +15,7 @@ limitations under the License.
  **********************************************************************/
 package com.hubspot.jinjava.util;
 
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 
 public final class ObjectValue {

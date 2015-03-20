@@ -5,7 +5,8 @@ import static org.assertj.core.api.Assertions.entry;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
+import com.hubspot.jinjava.util.StandardCharsets;
+
 
 import org.junit.After;
 import org.junit.Before;

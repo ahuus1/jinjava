@@ -15,12 +15,12 @@ limitations under the License.
  **********************************************************************/
 package com.hubspot.jinjava.tree;
 
-import java.util.LinkedList;
-
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;
 
 public class RootNode extends Node {
+
   private static final long serialVersionUID = 97675838726004658L;
+  public static final String TREE_ROOT_END = "anysome";
 
   RootNode() {
     super(null, 0);
@@ -33,13 +33,13 @@ public class RootNode extends Node {
 
   @Override
   public String getName() {
-    return getClass().getSimpleName();
+    return TREE_ROOT_END;
   }
 
   @Override
   public Node clone() {
     Node clone = new RootNode();
-    clone.setChildren(new LinkedList<>(this.getChildren()));
+    clone.setChildren(this.getChildren().clone(clone));
     return clone;
   }
 }

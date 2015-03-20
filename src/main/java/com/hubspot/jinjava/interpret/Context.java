@@ -75,7 +75,7 @@ public class Context extends ScopeMap<String, Object> {
     Map<String, MacroFunction> macros = (Map<String, MacroFunction>) getScope().get(GLOBAL_MACROS_SCOPE_KEY);
 
     if(macros == null) {
-      macros = new HashMap<>();
+      macros = new HashMap<String, MacroFunction>();
       getScope().put(GLOBAL_MACROS_SCOPE_KEY, macros);
     }
     
@@ -100,7 +100,7 @@ public class Context extends ScopeMap<String, Object> {
     return getGlobalMacro(identifier) != null;
   }
   
-  @SafeVarargs
+  //@SafeVarargs
   @SuppressWarnings("unchecked")
   public final void registerClasses(Class<? extends Importable>... classes) {
     for(Class<? extends Importable> c : classes) {
@@ -158,7 +158,7 @@ public class Context extends ScopeMap<String, Object> {
   }
   
   public Collection<ELFunctionDefinition> getAllFunctions() {
-    List<ELFunctionDefinition> fns = new ArrayList<>(functionLibrary.entries());
+    List<ELFunctionDefinition> fns = new ArrayList<ELFunctionDefinition>(functionLibrary.entries());
     
     if(parent != null) {
       fns.addAll(parent.getAllFunctions());

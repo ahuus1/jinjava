@@ -2,7 +2,7 @@ package com.hubspot.jinjava.lib.filter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
@@ -38,7 +38,7 @@ public class GroupByFilter implements Filter {
       groupBuckets.put(grouper, val);
     }
     
-    List<Group> groups = new ArrayList<>();
+    List<Group> groups = new ArrayList<Group>();
     for(String grouper : groupBuckets.keySet()) {
       List<Object> list = Lists.newArrayList(groupBuckets.get(grouper));
       groups.add(new Group(grouper, list));

@@ -2,7 +2,7 @@ package com.hubspot.jinjava.lib.filter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -31,7 +31,7 @@ public class IndentFilter implements Filter {
       indentFirst = BooleanUtils.toBoolean(args[1]);
     }
     
-    List<String> indentedLines = new ArrayList<>();
+    List<String> indentedLines = new ArrayList<String>();
     for(String line : NEWLINE_SPLITTER.split(Objects.toString(var, ""))) {
       int thisWidth = indentedLines.size() == 0 && !indentFirst ? 0 : width;
       indentedLines.add(StringUtils.repeat(' ', thisWidth) + line);

@@ -15,39 +15,38 @@ limitations under the License.
  **********************************************************************/
 package com.hubspot.jinjava.tree;
 
-import java.util.LinkedList;
-
 import com.hubspot.jinjava.interpret.InterpretException;
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;
+import com.hubspot.jinjava.interpret.UnknownTagException;
 import com.hubspot.jinjava.lib.tag.Tag;
-import com.hubspot.jinjava.tree.parse.TagToken;
+import com.hubspot.jinjava.parse.TagToken;
 
 public class TagNode extends Node {
 
   private static final long serialVersionUID = 2405693063353887509L;
 
-  private final Tag tag;
-  private final TagToken master;
-  private final String endName;
+  private TagToken master;
+  private String endName = null;
 
-  public TagNode(Tag tag, TagToken token) {
+  public TagNode(TagToken token, JinjavaInterpreter interpreter) {
     super(token, token.getLineNumber());
-    
-    this.master = token;
-    this.tag = tag;
-    this.endName = tag.getEndTagName();
+    master = token;
+    Tag tag = interpreter.getContext().getTag(master.getTagName());
+    if (tag == null) {
+      throw new UnknownTagException(master.getTagName(), master.getImage(), token.getLineNumber());
+    }
+    endName = tag.getEndTagName();
   }
   
   private TagNode(TagNode n) {
     super(n.master, n.getLineNumber());
-
-    tag = n.tag;
     master = n.master;
     endName = n.endName;
   }
 
   @Override
   public String render(JinjavaInterpreter interpreter) {
+    Tag tag = interpreter.getContext().getTag(master.getTagName());
     try {
       return tag.interpret(this, interpreter);
     } catch (Exception e) {
@@ -76,7 +75,7 @@ public class TagNode extends Node {
   @Override
   public Node clone() {
     Node clone = new TagNode(this);
-    clone.setChildren(new LinkedList<>(this.getChildren()));
+    clone.setChildren(this.getChildren().clone(clone));
     return clone;
   }
 }

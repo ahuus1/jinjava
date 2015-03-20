@@ -3,7 +3,7 @@ package com.hubspot.jinjava.lib.filter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -26,7 +26,7 @@ public class XmlAttrFilter implements Filter {
     
     @SuppressWarnings("unchecked")
     Map<String, Object> dict = (Map<String, Object>) var;
-    List<String> attrs = new ArrayList<>();
+    List<String> attrs = new ArrayList<String>();
 
     for(Map.Entry<String, Object> entry : dict.entrySet()) {
       attrs.add(new StringBuilder(entry.getKey())

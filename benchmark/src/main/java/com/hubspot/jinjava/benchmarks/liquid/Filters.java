@@ -2,7 +2,7 @@ package com.hubspot.jinjava.benchmarks.liquid;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 

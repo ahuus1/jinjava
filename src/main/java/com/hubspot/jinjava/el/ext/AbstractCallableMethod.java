@@ -35,9 +35,9 @@ public abstract class AbstractCallableMethod {
   }
   
   public Object evaluate(Object... args) {
-    Map<String, Object> argMap = new LinkedHashMap<>(argNamesWithDefaults);
-    Map<String, Object> kwargMap = new LinkedHashMap<>();
-    List<Object> varArgs = new ArrayList<>();
+    Map<String, Object> argMap = new LinkedHashMap<String, Object>(argNamesWithDefaults);
+    Map<String, Object> kwargMap = new LinkedHashMap<String, Object>();
+    List<Object> varArgs = new ArrayList<Object>();
     
     int argPos = 0;
     for(Map.Entry<String, Object> argEntry : argMap.entrySet()) {
@@ -82,7 +82,7 @@ public abstract class AbstractCallableMethod {
   }
   
   public List<String> getArguments() {
-    return new ArrayList<>(argNamesWithDefaults.keySet());
+    return new ArrayList<String>(argNamesWithDefaults.keySet());
   }
 
   public Map<String, Object> getDefaults() {

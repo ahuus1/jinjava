@@ -15,17 +15,16 @@ limitations under the License.
  **********************************************************************/
 package com.hubspot.jinjava.tree;
 
-import java.util.LinkedList;
-
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;
-import com.hubspot.jinjava.tree.parse.TextToken;
+import com.hubspot.jinjava.parse.FixedToken;
 
 public class TextNode extends Node {
+  private static final String NAME = "Text_Node";
   private static final long serialVersionUID = 8488738480534354216L;
 
-  private final TextToken master;
+  private FixedToken master;
 
-  public TextNode(TextToken token) {
+  public TextNode(FixedToken token) {
     super(token, token.getLineNumber());
     master = token;
   }
@@ -42,13 +41,13 @@ public class TextNode extends Node {
 
   @Override
   public String getName() {
-    return getClass().getSimpleName();
+    return NAME;
   }
 
   @Override
   public Node clone() {
     Node clone = new TextNode(master);
-    clone.setChildren(new LinkedList<>(this.getChildren()));
+    clone.setChildren(this.getChildren().clone(clone));
     return clone;
   }
 }

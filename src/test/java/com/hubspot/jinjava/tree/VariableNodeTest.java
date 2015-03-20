@@ -2,7 +2,8 @@ package com.hubspot.jinjava.tree;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.nio.charset.StandardCharsets;
+import com.hubspot.jinjava.util.StandardCharsets;
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +13,10 @@ import com.google.common.io.Resources;
 import com.hubspot.jinjava.Jinjava;
 import com.hubspot.jinjava.interpret.Context;
 import com.hubspot.jinjava.interpret.JinjavaInterpreter;
+import com.hubspot.jinjava.parse.TokenParser;
 
 
-public class ExpressionNodeTest {
+public class VariableNodeTest {
 
   private Context context;
   private JinjavaInterpreter interpreter;
@@ -31,7 +33,7 @@ public class ExpressionNodeTest {
     context.put("myvar", "hello {{ place }}");
     context.put("place", "world");
     
-    ExpressionNode node = fixture("simplevar");
+    VariableNode node = fixture("simplevar");
     assertThat(node.render(interpreter)).isEqualTo("hello world");
   }
   
@@ -40,7 +42,7 @@ public class ExpressionNodeTest {
     context.put("myvar", "hello {{ place }}");
     context.put("place", "{{ place }}");
     
-    ExpressionNode node = fixture("simplevar");
+    VariableNode node = fixture("simplevar");
     assertThat(node.render(interpreter)).isEqualTo("hello {{ place }}");
   }
   
@@ -60,11 +62,11 @@ public class ExpressionNodeTest {
     return parse(jinja).render(interpreter);
   }
   
-  private ExpressionNode parse(String jinja) {
-    return (ExpressionNode) new TreeParser(interpreter, jinja).buildTree().getChildren().getFirst();
+  private VariableNode parse(String jinja) {
+    return (VariableNode) TreeParser.parseTree(new TokenParser(interpreter, jinja)).getChildren().getFirst();
   }
   
-  private ExpressionNode fixture(String name) {
+  private VariableNode fixture(String name) {
     try {
       return parse(Resources.toString(Resources.getResource(String.format("varblocks/%s.html", name)), StandardCharsets.UTF_8));
     }

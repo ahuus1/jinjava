@@ -2,7 +2,7 @@ package com.hubspot.jinjava.lib.filter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -20,7 +20,7 @@ public class JoinFilter implements Filter {
 
   @Override
   public Object filter(Object var, JinjavaInterpreter interpreter, String... args) {
-    List<String> vals = new ArrayList<>();
+    List<String> vals = new ArrayList<String>();
     
     String separator = "";
     if(args.length > 0) {

@@ -2,7 +2,7 @@ package com.hubspot.jinjava.lib.filter;
 
 import static com.hubspot.jinjava.util.Logging.ENGINE_LOG;
 
-import java.util.Objects;
+import com.hubspot.jinjava.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;

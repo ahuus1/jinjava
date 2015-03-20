@@ -2,9 +2,7 @@ package com.hubspot.jinjava.lib.filter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,7 +32,7 @@ public class PrettyPrintFilterTest {
   
   @Test
   public void ppPyDate() {
-    assertThat(f.filter(new PyishDate(ZonedDateTime.of(2014, 8, 4, 0, 0, 0, 0, ZoneOffset.UTC)), null)).isEqualTo("{% raw %}(PyishDate: 2014-08-04 00:00:00){% endraw %}");
+    assertThat(f.filter(new PyishDate(DateTime.parse("2014-08-04")), null)).isEqualTo("{% raw %}(PyishDate: 2014-08-04 00:00:00){% endraw %}");
   }
   
   @Test
